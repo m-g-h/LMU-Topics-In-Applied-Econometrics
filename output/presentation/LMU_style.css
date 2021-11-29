@@ -1,0 +1,59 @@
+
+.remark-slide-content {
+  font-size: 26px;
+}
+
+.title-slide h2::after, .mline h1::after {
+    content: '';
+    display: block;
+    border: none;
+    background-color: #00883a;
+    color: #00883a;
+    height: 1px;
+}
+
+.h1_bl {
+    font-weight: normal;
+    margin-top: -95px;
+    margin-left: 0px;
+    color: rgb(35, 55, 59);
+}
+
+.title-slide {
+url(pictures/.logo/ZU-logo.png); /* Title Picture */
+    background-position: right 30px top;
+    background-size: 30%;
+    border-bottom: 0px solid #00883a;
+    box-shadow:  0 55px 0 #fff;
+  }
+
+.title-slide > h1  {
+  border-bottom: 3px solid #00883a; /* this adds the horizontal line */
+}
+
+hr, .title-slide h2::after, .mline h1::after {
+    content: '';
+    display: block;
+    border: none;
+    background-color: #00883a;
+    color: #00883a;
+    height: 1px;
+}
+
+.left-col {
+  width: 45%;
+  float: left;
+}
+.right-col {
+  width: 45%;
+  float: right;
+}
+
+.remark-inline-code_inv {
+    background: #e7e8e2;
+    color: black;
+    border-radius: 3px;
+    padding: 4px;
+    font-family: 'Fira Code', 'Lucida Console', Monaco, monospace;
+    font-size: 80%
+}
