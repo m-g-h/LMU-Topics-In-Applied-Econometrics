@@ -345,4 +345,4 @@ RDD, Local-Linear Regression and DiD
 
 .center[
 ![](pictures/figure_B2.svg)
-
+]
