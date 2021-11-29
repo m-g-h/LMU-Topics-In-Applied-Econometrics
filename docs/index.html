@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Clark et al.(2020): The impact of Terrorism on Individual Well-Being</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Martin Georg Haas" />
+    <meta name="date" content="2021-11-30" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="LMU_style.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Clark et al.(2020): The impact of Terrorism on Individual Well-Being
+## Evidence from the Boston Marathon Bombing
+### Martin Georg Haas
+### 2021-11-30
+
+---
+
+
+
+
+# Introduction: Research Interest
+
+## Effect of terrorism on outcomes such as:
+- **Wellbeing**
+    - Happiness
+    - Stress
+    - Negative affect
+    - Net affect (happiness - negative affect)
+- **Time allocation**
+    - Market hours
+    - Household Work
+    - Childcare
+    - Active Leisure
+    - Watching TV or listening to Media
+    - Sleep
+
+---
+
+# Introduction: Big Picture
+
+Time-Series of data around 2013 Boston Marathon Bombing
+
+Focus on *individual* rather than *aggregated* consequences
+
+Research on terrorism needs to account for:
+- Non-random timing of attacks
+- Short-lived effects
+
+Approaches:
+- Synthetic control groups
+- Difference-in-Differences (`DiD`)
+- Regression Discontinuity Design (`RDD`)
+
+---
+
+# Introduction: Contribution
+
+First study on the effect on individual wellbeing of this event
+
+--
+
+**Problem:** Neither `RDD` nor `DiD` work here
+- `RDD`: Overlap of marathon and bombing effects
+- `DiD`: Effects are too short-lived
+
+Clark et al.(2020) provide their own event study: effects last for *one week*
+
+--
+
+**Solution:** Combined `RDD` and `DiD` model
+
+Difference in `RDD` effects between 2012 (control group) and 2013 (treatment group)
+
+
+
+---
+
+class: inverse, center, middle
+
+# Empirical Approach
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=960px&gt;&lt;/html&gt; 
+
+RDD, Local-Linear Regression and DiD
+
+---
+
+# Data and Setup
+
+**Data:** American Time Use Survey + Well-Being module (BLS 2020)
+- 4842 observations (ca 50/50 in 2012 and 2013)
+- `\(\pm\)` 35 days around the marathon
+- Code and Data freely available [here](https://oup-silverchair-cdn-com.emedien.ub.uni-muenchen.de/oup/backfile/Content_public/Journal/ej/130/631/10.1093_ej_ueaa053/1/ueaa053_replication_package.zip?Expires=1641220701&amp;Signature=ZR25ucu0F~5jamhDR3CE9i4jILeq-pKC1PkC4HiyV6KUIwBl-GGTwG8gAmoI8K9oRkGKnZ1mtzQ59TEvAdlY~X-I5He6Zd29k5dGukxVj-57X2iWfbJH3QGDsgE5IrPF6CmaLRvdM1iM8MFqTusjU2btwQhxIBh0zr2KQr2VQDeCCReSCv55bB0ekOlUNte-Smlr3tGan5UOngspb3feHQtcvLX9EJQ1A~VM~BZL06v8Xq2ftbwwe~wW7CFj5dSPzzIGjiELtkHurKjtwPlL1QqOuKV~uhT9BMSdoIGiKEgX8nfVIjzhsK39ua54O8~XDLe1vbNbuPcGPr2NqWqXnQ__&amp;Key-Pair-Id=APKAIE5G5CRDK6RD3PGA)
+
+-- 
+
+**Outcomes:** Daily wellbeing and time-use reports `\(y_i\)`
+
+**Runnning variable:** Time distance to Marathon `\(D_i = x_i - c\)` 
+
+**Exposure to treatment:** Deterministic in time, via exposure through media
+`\(\Rightarrow\)` `Sharp RDD`
+
+`$$T_i = \begin{cases}
+0 &amp; \text{for } x_i \geq c \\
+1 &amp; \text{for } x_i &lt; c
+\end{cases}$$`
+
+`\(y_i = \beta \cdot T_i + f(D_i) + u_i\)` is implemented as `Local Linear Regression`
+
+
+---
+
+# Local Linear Regression
+
+.left-col[
+![](pictures/plot_LLR_RDD_1.svg)
+]
+
+.right-col[
+
+Limit `bandwidth` around the event (here: 35 days)
+
+]
+---
+
+# Local Linear Regression
+
+.left-col[
+![](pictures/plot_LLR_RDD_3.svg)
+]
+
+.right-col[
+
+Limit `bandwidth` around the event (here: 35 days)
+
+Combine seperate regressions for left and right side:
+
+`$$\begin{aligned}
+y_i = &amp;\big[\alpha_{L} + \sigma_L D_i + u_i\big] \cdot (1-T_i)
+\end{aligned}$$`
+
+]
+
+
+
+---
+
+# Local Linear Regression
+
+.left-col[
+![](pictures/plot_LLR_RDD_4.svg)
+]
+
+.right-col[
+
+Limit `bandwidth` around the event (here: 35 days)
+
+Combine seperate regressions for left and right side:
+
+`$$\begin{aligned}
+y_i = &amp;\big[\alpha_{L} + \sigma_L D_i + u_i\big] \cdot (1-T_i) \\
+&amp;+ \big[\alpha_R + \sigma_R D_i + u_i \big] \cdot  T_i \\
+\end{aligned}$$`
+
+]
+
+---
+
+#Local Linear Regression
+
+.left-col[
+![](pictures/plot_LLR_RDD_5.svg)
+]
+
+.right-col[
+
+Limit `bandwidth` around the event (here: 35 days)
+
+Combine seperate regressions for left and right side:
+
+`$$\begin{aligned}
+y_i = &amp;\big[\alpha_{L} + \sigma_L D_i + u_i\big] \cdot (1-T_i) \\
+&amp;+ \big[\alpha_R + \sigma_R D_i + u_i \big] \cdot  T_i \\
+= &amp;\alpha_L + \underset{\beta}{\underbrace{(\alpha_R - \alpha_L)}} T_i \\
+&amp;+ \sigma_LD_i \cdot (1-T_i) \\
+&amp;+ \sigma_RD_i \cdot T_i \\
+&amp;+ u_i
+\end{aligned}$$`
+
+]
+
+---
+
+# Identification: Problem
+
+Wellbeing and time-use may be affected by multiple events:
+- Boston Marathon 
+- 2013 Attack
+
+
+Effects might *cancel out* or *add up* `\(\Rightarrow\)` **biased treatment estimate**
+
+--
+
+**Solution:** Use 2012 Boston Marathon as control group.
+
+`$$Year_i = \begin{cases}
+0 &amp; \text{for 2012} \\
+1 &amp; \text{for 2013} 
+\end{cases}$$`
+
+This imports the usual `DiD` assumptions
+
+Also introduce control variables to account for population differences between 2012 and 2013
+
+---
+
+# Identification: Solution
+
+Again, we just combine regressions using a dummy:
+
+`$$\begin{aligned}
+y_i &amp;= \left[\alpha_{LC} + \beta_C T_i  + \sigma_{LC}D_i \cdot (1-T_i)  + \sigma_{RC}D_i \cdot T_i  + u_i \right] (1-Year_i) \\
+&amp; +\left[\alpha_{LT} + \beta_T T_i  + \sigma_{LT}D_i \cdot (1-T_i)  + \sigma_{RT}D_i \cdot T_i  + u_i \right] (Year_i)
+\end{aligned}$$`
+
+---
+# Identification: Solution
+
+Again, we just combine regressions using a dummy:
+
+`$$\begin{aligned}
+y_i &amp;= \left[\alpha_{LC} + \beta_C T_i  + \sigma_{LC}D_i \cdot (1-T_i)  + \sigma_{RC}D_i \cdot T_i  + u_i \right] (1-Year_i) \\
+&amp; +\left[\alpha_{LT} + \beta_T T_i  + \sigma_{LT}D_i \cdot (1-T_i)  + \sigma_{RT}D_i \cdot T_i  + u_i \right] (Year_i)
+\end{aligned}$$`
+
+
+Rewritten:
+`$$\begin{aligned}
+y_i &amp;= \alpha_{LC} + (\alpha_{LT} - \alpha_{LC}) Year_i + \beta_CT_i + \underset{\text{RDD-DiD Estimator}}{\underbrace{(\beta_T - \beta_C)T_i\cdot Year_i}} \\
+&amp;+ \sigma_{LC}D_i(1-T_i)(1-Year_i) \\
+&amp;+ \sigma_{RC}D_i(T_i)(1-Year_i) \\
+&amp;+ \sigma_{LT}D_i(1-T_i)(Year_i) \\
+&amp;+ \sigma_{RT}D_i(T_i)(Year_i) \\
+&amp;+ u_i
+\end{aligned}$$`
+---
+
+class: inverse, center, middle
+
+# Main Results
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=960px&gt;&lt;/html&gt; 
+
+
+---
+
+# Effects on Well-Being: Happiness &amp; Stress
+
+.center[
+![](pictures/figure_1.svg)
+]
+
+---
+
+# Effects on Well-Being: Negative and Net Affect
+
+.center[
+![](pictures/figure_2.svg)
+]
+
+---
+
+# Effects on Well-Being: More Stuff
+
+.center[
+![](pictures/results_table_regressions.PNG)
+`\(^{***}\;p&lt;0.01 \qquad ^{**}\;p&lt;0.05 \qquad ^*\;p&lt;0.1\)`
+]
+
+---
+
+# Effects on Time Use: Regression Results
+
+.center[
+![](pictures/results_table_others.PNG)
+]
+
+--
+
+## Effects for different populations:
+
+- *Mens* *and* rural peoples affects were *not* affected
+- People from *nearer states* were stronger affected (2x)
+    - Counterevidence to previously found spillovers
+- No effects for *education*
+
+---
+
+# Conclusion and Summary
+
+New method to find effects for coinciding events: `RDD DiD`
+
+Shortcomings:
+- No formal identification proof (*does it need one?*)
+- No discussion of `DiD` assumtpions, i.e. *parallel trends* 
+- Only one control group (2012) (*there are more years*)
+
+---
+
+# References
+
+**BLS** (2020). *American Time Use Surves (ATUS)*. URL: [https://www.bls.gov/tus/](https://www.bls.gov/tus/)
+
+**Clark et al.** (2020). *Clark et al.(2020): The impact of Terrorism on Individual Well-Being. Evidence from the Boston Marathon Bombing*. The Economic Journal, 130, 2065-2104. [https://doi.org/10.1093/ej/ueaa053](https://doi.org/10.1093/ej/ueaa053)
+
+---
+
+class: inverse, center, middle
+
+# Appendix
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=960px&gt;&lt;/html&gt; 
+
+RDD, Local-Linear Regression and DiD
+
+---
+
+# Checking for Manipulation: Survey Frequency
+
+.center[
+![](pictures/figure_B1.svg)
+]
+
+---
+
+# Checking for Manipulation: Other Controls
+
+.center[
+![](pictures/figure_B2.svg)
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "solarized-light",
+"slideNumberFormat": "%current%",
+"highlightLines": true,
+"highlightSpans": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

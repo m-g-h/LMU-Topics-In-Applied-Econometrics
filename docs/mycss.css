@@ -1,0 +1,22 @@
+.title-slide {
+    background-image: url(pictures/.logo/zu_logo.png); /* Title Picture */
+    background-position: right 30px top;
+    background-size: 30%;
+    border-bottom: 0px solid #522D80;
+    box-shadow:  0 55px 0 #fff;
+  }
+
+.title-slide > h1  {
+  border-bottom: 3px solid #EB811B; /* this adds the horizontal line */
+}
+
+.left-col {
+  width: 45%;
+  float: left;
+}
+.right-col {
+  width: 45%;
+  float: right;
+}
+
+
