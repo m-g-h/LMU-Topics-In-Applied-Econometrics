@@ -98,7 +98,7 @@ RDD, Local-Linear Regression and DiD
 - $\pm$ 35 days around the marathon
 - Code and Data freely available [here](https://oup-silverchair-cdn-com.emedien.ub.uni-muenchen.de/oup/backfile/Content_public/Journal/ej/130/631/10.1093_ej_ueaa053/1/ueaa053_replication_package.zip?Expires=1641220701&Signature=ZR25ucu0F~5jamhDR3CE9i4jILeq-pKC1PkC4HiyV6KUIwBl-GGTwG8gAmoI8K9oRkGKnZ1mtzQ59TEvAdlY~X-I5He6Zd29k5dGukxVj-57X2iWfbJH3QGDsgE5IrPF6CmaLRvdM1iM8MFqTusjU2btwQhxIBh0zr2KQr2VQDeCCReSCv55bB0ekOlUNte-Smlr3tGan5UOngspb3feHQtcvLX9EJQ1A~VM~BZL06v8Xq2ftbwwe~wW7CFj5dSPzzIGjiELtkHurKjtwPlL1QqOuKV~uhT9BMSdoIGiKEgX8nfVIjzhsK39ua54O8~XDLe1vbNbuPcGPr2NqWqXnQ__&Key-Pair-Id=APKAIE5G5CRDK6RD3PGA)
 
--- 
+--
 
 **Outcomes:** Daily wellbeing and time-use reports $y_i$
 
@@ -113,7 +113,6 @@ $$T_i = \begin{cases}
 \end{cases}$$
 
 $y_i = \beta \cdot T_i + f(D_i) + u_i$ is implemented as `Local Linear Regression`
-
 
 ---
 
