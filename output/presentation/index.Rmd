@@ -52,7 +52,9 @@ Research on terrorism needs to account for:
 - Non-random timing of attacks
 - Short-lived effects
 
-Approaches:
+--
+
+Common Approaches:
 - Synthetic control groups
 - Difference-in-Differences (`DiD`)
 - Regression Discontinuity Design (`RDD`)
@@ -111,6 +113,8 @@ $$T_i = \begin{cases}
 0 & \text{for } x_i \geq c \\
 1 & \text{for } x_i < c
 \end{cases}$$
+
+--
 
 $y_i = \beta \cdot T_i + f(D_i) + u_i$ is implemented as `Local Linear Regression`
 
@@ -277,7 +281,7 @@ class: inverse, center, middle
 
 ---
 
-# Effects on Well-Being: More Stuff
+# Effects on Well-Being: Regression Results
 
 .center[
 ![](pictures/results_table_regressions.PNG)
@@ -286,7 +290,7 @@ $^{***}\;p<0.01 \qquad ^{**}\;p<0.05 \qquad ^*\;p<0.1$
 
 ---
 
-# Effects on Time Use: Regression Results
+# Effects on Time Use: More Stuff
 
 .center[
 ![](pictures/results_table_others.PNG)
@@ -306,6 +310,10 @@ $^{***}\;p<0.01 \qquad ^{**}\;p<0.05 \qquad ^*\;p<0.1$
 # Conclusion and Summary
 
 New method to find effects for coinciding events: `RDD DiD`
+
+Confirming evidence for negative effects of terrorism on wellbeing
+
+Further evidence ofshort-lived nature of this effect
 
 Shortcomings:
 - No formal identification proof (*does it need one?*)
